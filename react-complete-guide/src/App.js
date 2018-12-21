@@ -17,7 +17,8 @@ class App extends Component {
     userName: [
       {name: 'Saurabh'},
       {name: 'Chaudhary'},
-    ]
+    ],
+    showPersons: false
   }
 
   switchNameHandler = (newName) => {
@@ -55,6 +56,13 @@ class App extends Component {
       ]
     })
   }
+  togglePersonsHandler = () => {
+    const doesShow = this.state.showPersons;
+    this.setState({
+      showPersons: !doesShow
+    });
+
+  }
 
   render() {
     const btnStyle = {
@@ -64,20 +72,24 @@ class App extends Component {
       padding: '8px',
       cursor: 'pointer'
     }
+    let persons = null;
+
+    if(this.state.showPersons) {
+      persons = (
+        <div>
+          {this.state.persons.map((person)=>{
+            return <Person key={person.name} name={person.name} age={person.age}/>
+          })}
+        </div>
+      )
+    }
     return (
       <div className="App">
         <h1>Hi...</h1>
-        <button style={btnStyle} onClick={ () => this.switchNameHandler('Differt syntex') } >Switch Name</button>
-        <Person name={this.state.persons[0].name} age={this.state.persons[0].age}/>
-        <Person  
-        name={this.state.persons[1].name} 
-        age={this.state.persons[1].age}
-        switchName={this.switchNameHandler.bind(this, '098765')}
-        changeName={this.changeNameHandler}
-        >
-        My hobiees are: xyz
-        </Person>
-        <Person  name={this.state.persons[2].name} age={this.state.persons[2].age}/>
+          {/* <button style={btnStyle} onClick={ () => this.switchNameHandler('Differt syntex') } >Switch Name</button> */}
+          <button style={btnStyle} onClick={ () => this.togglePersonsHandler('Differt syntex') } >Switch Name</button>
+          {persons}
+        
 
         {/* <UserOutput userName={this.state.userName[0].name}>
         User111
