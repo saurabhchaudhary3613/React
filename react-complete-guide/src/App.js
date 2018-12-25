@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import Person from './Person/Person';
 import UserOutput from './UserOutput/UserOutput';
 import UserInput from './UserInput/UserInput';
-import Radium, { StyleRoot } from 'radium';
+// import Radium, { StyleRoot } from 'radium';
 
 import './App.css';
 
@@ -90,11 +90,7 @@ class App extends Component {
       border: '1px solid red',
       font: 'inherit',
       padding: '8px',
-      cursor: 'pointer',
-      ':hover': {
-        backgroundColor: 'lightgreen',
-        color: 'black'
-      }
+      cursor: 'pointer'
     }
     let persons = null;
 
@@ -111,10 +107,10 @@ class App extends Component {
         </div>
       );
       btnStyle.backgroundColor = 'red';
-      btnStyle[':hover'] = {
-        backgroundColor: 'salmon',
-        color: 'black'
-      }
+      // btnStyle[':hover'] = {
+      //   backgroundColor: 'salmon',
+      //   color: 'black'
+      // }
     }
 
     const classes = [];
@@ -127,29 +123,29 @@ class App extends Component {
     }
 
     return (
-      <StyleRoot>
-        <div className="App">
-          <h1>Hi...</h1>
-          <p className={classes.join(' ')}>This is working</p>
-            {/* <button style={btnStyle} onClick={ () => this.switchNameHandler('Differt syntex') } >Switch Name</button> */}
-            <button style={btnStyle} onClick={ () => this.togglePersonsHandler('Differt syntex') } >Switch Name</button>
-            {persons}
-          
+     
+      <div className="App">
+        <h1>Hi...</h1>
+        <p className={classes.join(' ')}>This is working</p>
+          {/* <button style={btnStyle} onClick={ () => this.switchNameHandler('Differt syntex') } >Switch Name</button> */}
+          <button style={btnStyle} onClick={ () => this.togglePersonsHandler('Differt syntex') } >Switch Name</button>
+          {persons}
+        
 
-          {/* <UserOutput userName={this.state.userName[0].name}>
-          User111
-          </UserOutput>
-          <UserOutput userName={this.state.userName[1].name}>
-          User222
-          </UserOutput>
-          <UserInput changeUserName={this.changeUserNameHandler}/> */}
+        {/* <UserOutput userName={this.state.userName[0].name}>
+        User111
+        </UserOutput>
+        <UserOutput userName={this.state.userName[1].name}>
+        User222
+        </UserOutput>
+        <UserInput changeUserName={this.changeUserNameHandler}/> */}
 
-          
-          
-        </div>
-      </StyleRoot>
+        
+        
+      </div>
+      
     );
   }
 }
 
-export default Radium(App);
+export default App;
