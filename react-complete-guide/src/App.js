@@ -5,7 +5,7 @@ import UserOutput from './UserOutput/UserOutput';
 import UserInput from './UserInput/UserInput';
 // import Radium, { StyleRoot } from 'radium';
 
-import './App.css';
+import styles  from './App.css';
 
 class App extends Component {
 
@@ -113,20 +113,20 @@ class App extends Component {
       // }
     }
 
-    const classes = [];
+    const assignedclasses = [];
 
     if(this.state.persons.length <=2) {
-      classes.push('red');
+      assignedclasses.push(styles.red);
     }
     if(this.state.persons.length <=1) {
-      classes.push('bold');
+      assignedclasses.push(styles.bold);
     }
 
     return (
      
-      <div className="App">
+      <div className={styles.App}>
         <h1>Hi...</h1>
-        <p className={classes.join(' ')}>This is working</p>
+        <p className={assignedclasses.join(' ')}>This is working</p>
           {/* <button style={btnStyle} onClick={ () => this.switchNameHandler('Differt syntex') } >Switch Name</button> */}
           <button style={btnStyle} onClick={ () => this.togglePersonsHandler('Differt syntex') } >Switch Name</button>
           {persons}

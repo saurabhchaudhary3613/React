@@ -1,5 +1,6 @@
 import React from 'react';
-import Person from './Person.css';
+import styles from './Person.css';
+
 
 const person = (props) => {
     console.log(props);
@@ -9,7 +10,7 @@ const person = (props) => {
     //     }
     // }
     return (
-        <div className='person'>
+        <div className={styles.person}>
             <p  onClick={props.click}>I am { props.name } and I am { props.age } years old..!</p>
             <p onClick={props.switchName}>
             {props.children}
