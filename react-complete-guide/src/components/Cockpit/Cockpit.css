@@ -1,0 +1,22 @@
+.red {
+    color: red;
+}
+.bold {
+    font-weight: bold;
+}
+
+.btnStyle {
+    background: green;
+    border: 1px solid red;
+    font: inherit;
+    padding: 8px;
+    cursor: pointer;
+}
+
+.btnStyle:hover {
+    background: red;
+    border: 1px solid red;
+    font: inherit;
+    padding: 8px;
+    cursor: pointer;
+}

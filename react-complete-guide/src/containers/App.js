@@ -1,13 +1,29 @@
 import React, { Component } from 'react';
 
-import Person from './Person/Person';
-import UserOutput from './UserOutput/UserOutput';
-import UserInput from './UserInput/UserInput';
+import Persons from '../components/Persons/Persons';
+import Cockpit from '../components/Cockpit/Cockpit';
+
+
+// import UserOutput from '../components/UserOutput/UserOutput';
+// import UserInput from '../components/UserInput/UserInput';
 // import Radium, { StyleRoot } from 'radium';
 
 import styles  from './App.css';
 
 class App extends Component {
+
+  constructor(props) {
+    super(props);
+    console.log('Inside App js contructor', props);
+  }
+
+  componentWillMount() {
+    console.log('Inside App js componentWillMount()');
+  }
+  componentDidMount() {
+    console.log('Inside App js componentDidMount()');
+  }
+
 
   state = {
     persons: [
@@ -35,8 +51,9 @@ class App extends Component {
       ]
     })
   }
+  
   changeNameHandler = (event, id) => {
-    console.log('change');
+    
     // Don't do this: Do not mutate state directly. Use setState() 
     // this.state.persons[0].name = 'Saurabh';
 
@@ -50,8 +67,7 @@ class App extends Component {
     };
 
     // const person = Object.assign({}, this.state.persons[personIndex]);
-
-    person.name = event.target.value;
+    //person.name = event.target.value;
 
     const persons = [...this.state.persons];
     persons[personIndex] = person;
@@ -85,50 +101,31 @@ class App extends Component {
   }
 
   render() {
-    const btnStyle = {
-      backgroundColor: 'green',
-      border: '1px solid red',
-      font: 'inherit',
-      padding: '8px',
-      cursor: 'pointer'
-    }
+    console.log('Inside App js render()');
     let persons = null;
 
     if(this.state.showPersons) {
       persons = (
         <div>
-          {this.state.persons.map((person, index)=> {
-            return <Person key={person.id}
-                    click={() => {this.deletePersonsHandler(index)}}
-                    name={person.name} 
-                    changeName={(event) => {this.changeNameHandler(event, person.id)}}
-                    age={person.age}/>
-          })}
+          
+          <Persons 
+          persons={this.state.persons}
+          clicked={this.deletePersonsHandler}
+          changed={this.changeNameHandler}
+          />
+          
         </div>
       );
-      btnStyle.backgroundColor = 'red';
-      // btnStyle[':hover'] = {
-      //   backgroundColor: 'salmon',
-      //   color: 'black'
-      // }
-    }
-
-    const assignedclasses = [];
-
-    if(this.state.persons.length <=2) {
-      assignedclasses.push(styles.red);
-    }
-    if(this.state.persons.length <=1) {
-      assignedclasses.push(styles.bold);
     }
 
     return (
      
       <div className={styles.App}>
-        <h1>Hi...</h1>
-        <p className={assignedclasses.join(' ')}>This is working</p>
-          {/* <button style={btnStyle} onClick={ () => this.switchNameHandler('Differt syntex') } >Switch Name</button> */}
-          <button style={btnStyle} onClick={ () => this.togglePersonsHandler('Differt syntex') } >Switch Name</button>
+        <Cockpit showPersons={this.state.showPersons}
+          appTitle={this.props.title}
+           persons={this.state.persons}
+           clicked={this.togglePersonsHandler}
+          />
           {persons}
         
 
