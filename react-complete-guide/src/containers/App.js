@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import Persons from '../components/Persons/Persons';
 import Cockpit from '../components/Cockpit/Cockpit';
-import Aux1 from '../hoc/Aux1';
+import ReactAux from '../hoc/ReactAux';
 
 import withClass from '../hoc/withClass';
 
@@ -127,14 +127,14 @@ class App extends Component {
     }
 
     return (
-      <Aux1>
+      <ReactAux>
         <Cockpit showPersons={this.state.showPersons}
           appTitle={this.props.title}
            persons={this.state.persons}
            clicked={this.togglePersonsHandler}
           />
           {persons}
-      </Aux1>
+      </ReactAux>
     );
   }
 }
