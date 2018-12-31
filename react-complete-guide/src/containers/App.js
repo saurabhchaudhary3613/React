@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 
 import Persons from '../components/Persons/Persons';
 import Cockpit from '../components/Cockpit/Cockpit';
+import Aux1 from '../hoc/Aux1';
+
+import withClass from '../hoc/withClass';
 
 
 // import UserOutput from '../components/UserOutput/UserOutput';
@@ -35,7 +38,8 @@ class App extends Component {
       {name: 'Saurabh'},
       {name: 'Chaudhary'},
     ],
-    showPersons: false
+    showPersons: false,
+    toggleClicked: 0
   }
 
   switchNameHandler = (newName) => {
@@ -67,7 +71,7 @@ class App extends Component {
     };
 
     // const person = Object.assign({}, this.state.persons[personIndex]);
-    //person.name = event.target.value;
+    person.name = event.target.value;
 
     const persons = [...this.state.persons];
     persons[personIndex] = person;
@@ -86,9 +90,13 @@ class App extends Component {
   }
   togglePersonsHandler = () => {
     const doesShow = this.state.showPersons;
-    this.setState({
-      showPersons: !doesShow
-    });
+    
+    this.setState((prevState, props) => {
+      return {
+        showPersons: !doesShow,
+        toggleClicked: prevState.toggleClicked + 1
+      }
+    })
 
   }
 
@@ -119,30 +127,16 @@ class App extends Component {
     }
 
     return (
-     
-      <div className={styles.App}>
+      <Aux1>
         <Cockpit showPersons={this.state.showPersons}
           appTitle={this.props.title}
            persons={this.state.persons}
            clicked={this.togglePersonsHandler}
           />
           {persons}
-        
-
-        {/* <UserOutput userName={this.state.userName[0].name}>
-        User111
-        </UserOutput>
-        <UserOutput userName={this.state.userName[1].name}>
-        User222
-        </UserOutput>
-        <UserInput changeUserName={this.changeUserNameHandler}/> */}
-
-        
-        
-      </div>
-      
+      </Aux1>
     );
   }
 }
 
-export default App;
+export default withClass(App, styles.App);
