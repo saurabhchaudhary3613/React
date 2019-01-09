@@ -13,11 +13,27 @@ import withClass from '../hoc/withClass';
 
 import styles  from './App.css';
 
+export const AuthContext = React.createContext(true);
+
 class App extends Component {
 
   constructor(props) {
     super(props);
     console.log('Inside App js contructor', props);
+    this.state = {
+      persons: [
+        {id: '1010', name: 'SA', age: "30" },
+        {id: '1020', name: 'RA', age: 40 },
+        {id: '1030', name: 'TY', age: 50 }
+      ],
+      userName: [
+        {name: 'Saurabh'},
+        {name: 'Chaudhary'},
+      ],
+      showPersons: false,
+      toggleClicked: 0,
+      authenticated: false
+    }
   }
 
   componentWillMount() {
@@ -28,19 +44,7 @@ class App extends Component {
   }
 
 
-  state = {
-    persons: [
-      {id: '1010', name: 'SA', age: "30" },
-      {id: '1020', name: 'RA', age: 40 },
-      {id: '1030', name: 'TY', age: 50 }
-    ],
-    userName: [
-      {name: 'Saurabh'},
-      {name: 'Chaudhary'},
-    ],
-    showPersons: false,
-    toggleClicked: 0
-  }
+  
 
   switchNameHandler = (newName) => {
     console.log('sa');
@@ -108,6 +112,10 @@ class App extends Component {
     this.setState({persons: persons})
   }
 
+  loginHandler() {
+    // this.setState({authenticated: true});
+  }
+
   render() {
     console.log('Inside App js render()');
     let persons = null;
@@ -132,8 +140,12 @@ class App extends Component {
           appTitle={this.props.title}
            persons={this.state.persons}
            clicked={this.togglePersonsHandler}
+           login={this.loginHandler}
+
           />
-          {persons}
+          <AuthContext.Provider value={this.state.authenticated}>
+            {persons}
+          </AuthContext.Provider>
       </ReactAux>
     );
   }
